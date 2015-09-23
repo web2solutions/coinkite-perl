@@ -7,7 +7,6 @@ use Digest::SHA qw(hmac_sha256_hex);
 use Data::Dumper;
 
 my $cgi = new CGI;
-print $cgi->header();
 
 sub sign
 {
@@ -28,13 +27,12 @@ sub sign
 		$ts = $now->ymd('-') . 'T' . $now->hms(':');
 	}
 
-    my $data = $endpoint . '|' . $ts;
+	my $data = $endpoint . '|' . $ts;
 	my $hm = hmac_sha256_hex($data, $API_SECRET);
 
 
     return ($hm, $ts);
 }
 
-#print 1;
-
+print $cgi->header();
 print Dumper(sign('/example/endpoint', '2014-06-03T17:48:47.774453'));
