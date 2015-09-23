@@ -29,8 +29,6 @@ sub sign
 
 	my $data = $endpoint . '|' . $ts;
 	my $hm = hmac_sha256_hex($data, $API_SECRET);
-
-
     return ($hm, $ts);
 }
 
